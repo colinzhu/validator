@@ -3,11 +3,12 @@ package colinzhu.validator;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Example {
     public static void main(String[] args) {
         Validator<TestBean> validator = new Validator<>();
-        validator.addRule(TestBean::getId, Validator.notNull("id"));
+        validator.addRule(TestBean::getId, Objects::nonNull, "id cannot be null");
         validator.addRule(TestBean::getStatus, Validator.notNull("status"));
         validator.addRule(TestBean::getStatus, Validator.maxSize("status", 3));
         validator.addRule(TestBean::getCurrency, Validator.size("currency", 3));
